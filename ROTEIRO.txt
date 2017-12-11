@@ -1,0 +1,59 @@
+INSTALACAOO DO ANSIBLE
+
+$ sudo apt-get update
+$ sudo apt-get install software-properties-common
+$ sudo apt-add-repository ppa:ansible/ansible
+$ sudo apt-get update
+$ sudo apt-get install ansible
+
+CRIACAOO DA CHAVE
+$ mkdir /etc/keys
+$ ssh-keygen
+    /etc/keys/key
+
+CADASTRAR CHAVES
+$ ssh-copy-id -i /etc/keys/key.pub root@docker
+$ ssh-copy-id -i /etc/keys/key.pub root@automation
+
+CONFIGURACAOO ANSIBLE
+$ vim /etc/ansibe/ansible.cfg
+
+    DESCOMENTAR :58 roles_path = /etc/ansoble/roles
+
+    DESCOMENTAR :61 host_key_checking = False
+    
+    DESCOMENTAR :93 timout = 30
+    
+    DESCOMENTAR :126 private_key_file = /etc/keys/key
+    
+INVENTARIO
+$ vim /etc/ansible/hosts
+    [devops]
+    devops.dexter.com.br ansible_connection = local
+    
+    [docker]
+    docker.dexter.com.br
+    
+    [automation]
+    automation.dexter.com.br
+
+TESTE DE CONEXAO
+$ ansible all -m ping
+
+PLAYBOOKS - DEVOPS
+$ mkdir /etc/ansible/playbooks
+
+$ mkdir /etc/ansible/playbooks/files
+
+$ vim /etc/ansible/playbooks/devops.yml
+
+$ vim /etc/ansible/playbooks/files/autosign.conf
+
+$ vim /etc/ansible/playbooks/files/puppet_master.conf
+    
+PLAYBOOKS - DOCKER
+$ vim /etc/ansible/playbooks/docker.yml
+
+PLAYBOOKS - AUTOMATION
+$ vim /etc/ansible/playbooks/automation.yml
+

@@ -1,0 +1,26 @@
+---
+- name: Instalar agent do puppet
+  hosts: devops
+  tasks:
+    - name: Baixar repositorio
+      apt:
+       deb: https://apt.puppetlabs.com/puppet5-release-xenial.deb
+
+    - name: Instalar puppet agent
+      apt: 
+       name: puppet
+       update_cache: yes
+       state: present
+
+    - name: Modificar arquivo de configuracao puppet master
+      copy:
+        src: files/puppet_master.conf
+        dest: /etc/puppet/puppet.conf
+
+    - name: Copiar autoconf
+      copy:
+        src: files/autosign.conf
+        dest: /etc/puppet/autosign.conf
+
+    - name: Promover agent para master
+      command: puppet master

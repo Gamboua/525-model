@@ -1,0 +1,8 @@
+[devops]
+devops.dexter.com.br ansible_connection=local
+
+[docker]
+docker.dexter.com.br
+
+[automation]
+automation.dexter.com.br

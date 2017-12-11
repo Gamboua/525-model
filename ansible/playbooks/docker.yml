@@ -1,0 +1,21 @@
+---
+- name: Instalar agent do puppet
+  hosts: docker
+  tasks:
+    - name: Baixar repositorio
+      apt:
+        deb: https://apt.puppetlabs.com/puppet5-release-xenial.deb
+
+    - name: Instalar puppet agent
+      apt: 
+       name: puppet
+       update_cache: yes
+       state: present
+
+    - name: Adicionar entrada etc/hosts
+      lineinfile:
+        path: /etc/hosts
+        line: "192.168.200.100 puppet"
+
+    - name: Iniciar agent
+      command: puppet agent --enable
