@@ -4,23 +4,26 @@
   tasks:
     - name: Baixar repositorio
       apt:
-       deb: https://apt.puppetlabs.com/puppet5-release-xenial.deb
+        deb: https://apt.puppetlabs.com/puppet5-release-xenial.deb
 
-    - name: Instalar puppet agent
+    - name: Instalar puppet server
       apt: 
-       name: puppet
+       name: puppetserver
        update_cache: yes
        state: present
 
-    - name: Modificar arquivo de configuracao puppet master
-      copy:
-        src: files/puppet_master.conf
-        dest: /etc/puppet/puppet.conf
+#    - name: Modificar arquivo de configuracao puppet master
+#      copy:
+#        src: files/puppet_master.conf
+#        dest: /etc/puppet/puppet.conf
 
-    - name: Copiar autoconf
-      copy:
-        src: files/autosign.conf
-        dest: /etc/puppet/autosign.conf
+#    - name: Copiar autoconf
+#      copy:
+#        src: files/autosign.conf
+#        dest: /etc/puppet/autosign.conf
+
+    - name: Start service
+      command: systemctl start puppetserver.service
 
     - name: Promover agent para master
-      command: puppet master
+      command: systemctl enable puppetserver.service

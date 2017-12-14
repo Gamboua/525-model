@@ -8,7 +8,7 @@
 
     - name: Instalar puppet agent
       apt: 
-       name: puppet
+       name: puppet-agent
        update_cache: yes
        state: present
 
@@ -18,4 +18,4 @@
         line: "192.168.200.100 puppet"
 
     - name: Iniciar agent
-      command: puppet agent --enable
+      command: systemctl enable puppet

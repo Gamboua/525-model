@@ -40,20 +40,35 @@ $ vim /etc/ansible/hosts
 TESTE DE CONEXAO
 $ ansible all -m ping
 
-PLAYBOOKS - DEVOPS
 $ mkdir /etc/ansible/playbooks
 
-$ mkdir /etc/ansible/playbooks/files
+PLAYBOOKS - DEVOPS
 
 $ vim /etc/ansible/playbooks/devops.yml
-
-$ vim /etc/ansible/playbooks/files/autosign.conf
-
-$ vim /etc/ansible/playbooks/files/puppet_master.conf
-    
+   
 PLAYBOOKS - DOCKER
 $ vim /etc/ansible/playbooks/docker.yml
 
 PLAYBOOKS - AUTOMATION
 $ vim /etc/ansible/playbooks/automation.yml
+
+AJUSTANDO PUPPET-SERVER
+$ vim /etc/default/puppet
+
+$ vim /etc/puppet/puppet.conf
+    [master]
+    autosign=$confdir/autosign.conf
+    ssl_client_header = SSL_CLIENT_S_DN 
+    ssl_client_verify_header = SSL_CLIENT_VERIFY
+
+$ vim /etc/puppet/manifests/site.pp
+
+CONFIGURANDO GITLAB
+$ vim /root/.ssh/config
+    Host devops.dexter.com.br
+    HostName devops.dexter.com.br
+    User git
+    IdentityFile /etc/keys/key
+    IdentitiesOnly yes
+    
 

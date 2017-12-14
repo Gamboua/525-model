@@ -4,14 +4,14 @@
   tasks:
     - name: Baixar repositorio
       yum:
-       name: https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
-       state: present
+        name: https://yum.puppet.com/puppet5/puppet5-release-el-7.noarch.rpm
+        state: present
 
     - name: Instalar puppet agent
       yum: "name={{ item }} state=present"
       with_items:
         - ntp
-        - puppet
+        - puppet-agent
 
     - name: Conifigurar ntp
       command: ntpdate pool.ntp.org
@@ -25,6 +25,3 @@
       service:
         name: puppet
         state: started
-
-    - name: Adicionar servico no boot da maquina
-      command: systemctl enable puppet
