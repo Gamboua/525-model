@@ -1,0 +1,20 @@
+- name: Baixar repositorio
+  apt:
+    deb: https://apt.puppetlabs.com/puppet5-release-xenial.deb
+
+- name: Instalar puppet agent
+  apt: 
+    name: puppet-agent
+    update_cache: yes
+    state: present
+
+- name: Adicionar entrada etc/hosts
+  lineinfile:
+    path: /etc/hosts
+    line: "192.168.200.100 puppet"
+
+- name: Iniciar agent
+  command: systemctl start puppet
+
+- name: habilitar servico no boot
+  command: systemctl enable puppet

@@ -1,27 +1,5 @@
 ---
-- name: Instalar agent do puppet
+- name: Aplicando conf na maquina automation
   hosts: automation
-  tasks:
-    - name: Baixar repositorio
-      yum:
-        name: https://yum.puppet.com/puppet5/puppet5-release-el-7.noarch.rpm
-        state: present
-
-    - name: Instalar puppet agent
-      yum: "name={{ item }} state=present"
-      with_items:
-        - ntp
-        - puppet-agent
-
-    - name: Conifigurar ntp
-      command: ntpdate pool.ntp.org
-
-    - name: Adicionar entrada etc/hosts
-      lineinfile:
-        path: /etc/hosts
-        line: "192.168.200.100 puppet"
-
-    - name: Startar servico
-      service:
-        name: puppet
-        state: started
+  roles:
+    - automation-conf

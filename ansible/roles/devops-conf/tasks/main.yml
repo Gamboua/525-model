@@ -1,0 +1,17 @@
+---
+# tasks file for devops-conf
+- name: Baixar repositorio
+  apt:
+    deb: https://apt.puppetlabs.com/puppet5-release-xenial.deb
+
+- name: Instalar puppet server
+  apt: 
+    name: puppetserver
+    update_cache: yes
+    state: present
+
+- name: Start service
+  command: systemctl start puppetserver.service
+
+- name: Promover agent para master
+  command: systemctl enable puppetserver.service
