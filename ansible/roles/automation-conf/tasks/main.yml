@@ -21,3 +21,6 @@
   service:
     name: puppet
     state: started
+
+- name: Enable service
+  command: systemctl enable puppet

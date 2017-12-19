@@ -10,6 +10,11 @@
     update_cache: yes
     state: present
 
+- replace:
+    path: /etc/default/puppetserver
+    regexp: '-Xms2g -Xmx2g'
+    replace: '-Xms256m -Xmx256m'
+
 - name: Start service
   command: systemctl start puppetserver.service
 
