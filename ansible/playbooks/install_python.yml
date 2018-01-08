@@ -1,0 +1,7 @@
+---
+- hosts: aws
+  gather_facts: False
+  become: yes
+  tasks:
+    - name: install python2
+      raw: apt install python-minimal -y

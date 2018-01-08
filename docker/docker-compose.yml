@@ -1,0 +1,22 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - data_db:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: dexter
+      MYSQL_USER: dexter
+      MYSQL_PASSWORD: 123456
+ 
+  wordpress:
+    depends_on:
+      - mysql
+    image: wordpress
+    ports:
+      - 8080:80
+
+volumes:
+  data_db:

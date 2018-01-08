@@ -42,6 +42,9 @@
 #
 # Copyright 2017 Your name here, unless otherwise noted.
 #
+
+# MUDEI ALGUMA COISA
+
 class automation {
   $packages = ['java', 'jenkins', 'rundeck']
 

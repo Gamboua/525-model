@@ -1,0 +1,9 @@
+---
+- name: Deploy modulo puppet
+  hosts: devops
+  tasks:
+    - name: Atualizar repositorio do modulo
+      git:
+        repo: git@devops.dexter.com.br:devops/automation.git
+        dest: /etc/puppetlabs/code/environments/production/modules/automation
+        key_file: /etc/keys/key

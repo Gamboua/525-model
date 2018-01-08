@@ -1,0 +1,31 @@
+---
+- name: Clonar projeto
+  hosts: devops
+  tasks:
+    - name: Clonar projeto
+      git:
+        repo: git@devops.dexter.com.br:devops/app.git
+        dest: /root/app
+        accept_hostkey: yes
+        key_file: /etc/keys/key
+
+- name: Deploy application
+  hosts: aws
+  become: yes
+  tasks:
+    - name: Copiar diretorio
+      synchronize:
+        src: /root/app
+        dest: /tmp
+        rsync_opts:
+          - "--exclude=.git"
+
+    - name: Criar imagem
+      command: docker build -t app .
+      args:
+        chdir: /tmp/app
+
+    - name: Rodar docker-compose
+      command: docker-compose up -d
+      args:
+        chdir: /tmp/app
